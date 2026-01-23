@@ -217,40 +217,41 @@ g.FileSystem.readFileAB = function (path) { return ej.readFileSync(path) }
      var originalConsoleWarn = window.console.warn;
      var originalConsoleDebug = window.console.debug;
      function createFn(tag) {
-         return function(...args) {
-             switch (tag) {
-                 case "[LOG]":
-                     originalConsoleLog(...args);
-                     break;
-                 case "[INFO]":
-                     originalConsoleInfo(...args);
-                     break;
-                 case "[VERB]":
-                     originalConsoleVerbose(...args);
-                     break;
-                 case "[ERRO]":
-                     originalConsoleError(...args);
-                     break;
-                 case "[WARN]":
-                     originalConsoleWarn(...args);
-                     break;
-                 case "[DEBUG]":
-                     originalConsoleDebug(...args);
-                     break;
-             }
-             
-             var argsList = [...args];
-             var argsString = '';
-             
-             argsList.forEach(item => {
-                 try {
-                     var string = JSON.stringify(item);
-                     argsString += `${string}__LOG_END__`;
-                 } catch(err) {
-                     argsString += `${item}__LOG_END__`;
-                 }
-             });
-             nativelog(`${tag} ${argsString}`);
+         return function(content) {
+             nativelog(content);
+//             switch (tag) {
+//                 case "[LOG]":
+//                     originalConsoleLog(...args);
+//                     break;
+//                 case "[INFO]":
+//                     originalConsoleInfo(...args);
+//                     break;
+//                 case "[VERB]":
+//                     originalConsoleVerbose(...args);
+//                     break;
+//                 case "[ERRO]":
+//                     originalConsoleError(...args);
+//                     break;
+//                 case "[WARN]":
+//                     originalConsoleWarn(...args);
+//                     break;
+//                 case "[DEBUG]":
+//                     originalConsoleDebug(...args);
+//                     break;
+//             }
+//             
+//             var argsList = [...args];
+//             var argsString = '';
+//             
+//             argsList.forEach(item => {
+//                 try {
+//                     var string = JSON.stringify(item);
+//                     argsString += `${string}__LOG_END__`;
+//                 } catch(err) {
+//                     argsString += `${item}__LOG_END__`;
+//                 }
+//             });
+//             nativelog(`${tag} ${argsString}`);
          }
      }
      window.console.log = createFn("[LOG]")
