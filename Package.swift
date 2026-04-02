@@ -18,8 +18,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "TCMPPExtMiniGame",
-            url: "https://tmf-warehouse-1314481471.cos.ap-beijing.myqcloud.com/tcmpp/ios-sdk/noshark/TCMPPExtMiniGame/2.3.4/26/TCMPPExtMiniGame_2.3.4.xcframework.zip",
-            checksum: "cffe04c35e4f2dd63c5a7efa82ae525aaf1be70355c195528aabdaae2c17aa74"
+            url: "https://tmf-warehouse-1314481471.cos.ap-beijing.myqcloud.com/tcmpp/ios-sdk/noshark/TCMPPExtMiniGame/2.3.5/30/TCMPPExtMiniGame_2.3.5.xcframework.zip",
+            checksum: "5fee2c0bb8ea8eead1131d2ffbf3c09c549be50a31dfd006d8d8deed25ef029f"
         ),
         .target(
             name: "TCMPPExtMiniGameWrapper",
