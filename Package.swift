@@ -26,7 +26,8 @@ let package = Package(
             dependencies: [
                 "TCMPPExtMiniGame",
             ],
-            resources: [.copy("magicbrushres.bundle")]
+            resources: [.copy("magicbrushres.bundle")],
+            linkerSettings: [ .linkedLibrary("c++") ]
         )
     ]
 ) 
