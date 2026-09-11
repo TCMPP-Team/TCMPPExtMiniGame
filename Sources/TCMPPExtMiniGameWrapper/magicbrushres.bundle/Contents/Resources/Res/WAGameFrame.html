@@ -228,7 +228,7 @@
           Object.defineProperty(exports, "__esModule", {
               value: true
           });
-          exports.BASE_URL = exports.global = exports.getDataType = exports.getUtf8Length = exports.weloge = exports.welog = void 0;
+          exports.BASE_URL = exports.global = exports.getDataType = exports.getUtf8Length = exports.weloge = exports.welog = exports.welogAsync = void 0;
           
           var welog =
           /** @class */
@@ -243,6 +243,18 @@
           }();
           
           exports.welog = welog;
+          
+          // 异步把日志上报给原生（postMessage 不阻塞主线程，适合高频 console 日志）
+          function welogAsync(data) {
+              try {
+                  var handler = window && window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.WeixinWeAppLog;
+                  if (handler) {
+                      handler.postMessage(data);
+                  }
+              } catch (e) {}
+          }
+          
+          exports.welogAsync = welogAsync;
           
           function weloge(err) {
               welog.log('[ERRO] ' + err);
@@ -1061,6 +1073,8 @@
               log: function (t) {
                   var e = l && l.contentWindow && l.contentWindow.console && l.contentWindow.console._log;
                   e || g.push(t), e && v && (g.length && (g.forEach(e), g = []), e(t));
+                  // 异步上报给原生，让宿主侧（原生 vConsole / xlog / 宿主 delegate）也能拿到游戏日志
+                  util_1.welogAsync(t);
                   var {
                       level: r,
                       logs: n
